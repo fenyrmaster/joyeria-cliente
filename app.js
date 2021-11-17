@@ -7,6 +7,7 @@ const ApiErrors = require("./utils/appError");
 const userRouter = require("./routes/userRoutes");
 const subcategoriaRouter = require("./routes/subcategoriasRoutes");
 const productosRouter = require("./routes/productosRoutes");
+const compression = require("compression");
 const pedidoRouter = require("./routes/pedidoRoutes");
 const xss = require("xss-clean");
 const dotenv = require("dotenv");
@@ -39,6 +40,7 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: true, limit: "10kb" }));
 app.use(xss());
 app.use(mongoSanitizer());
+app.use(compression());
 
 app.use("/api/usuarios", userRouter);
 app.use("/api/subcategorias", subcategoriaRouter);
