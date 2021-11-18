@@ -70,14 +70,17 @@ exports.registrarFotosUpdate = catchAsync(async(req,res,next) => {
     if(!req.files) return next();
     if(req.files.imagenPortada){
         const imagenPortada = `producto-${uuid.v4()}-${Date.now()}-portada`;
+        console.log("si funciona 1");
         await sharp(req.files.imagenPortada[0].buffer).resize(600,500).toFormat("jpeg").jpeg({quality: 90}).toFile(`public/img/productos/${imagenPortada}`);
         await cloudinary.uploader.upload(`public/img/productos/${imagenPortada}`,{
             resource_type: "image",
             public_id: imagenPortada
         });
+        console.log("si funciona 2");
         let url = cloudinary.image(imagenPortada);
         let urlCortada = url.split("=")[1].split("'")[1];
         req.body.imagenPortada = urlCortada;
+        console.log("si funciona 3");
     }
     if(req.files.imagenes){
         await Promise.all(req.files.imagenes.map(async(file, index) => {
