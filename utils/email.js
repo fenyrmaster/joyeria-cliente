@@ -35,6 +35,7 @@ module.exports = class Email {
         const html = pug.renderFile(`${__dirname}/../emails/${template}.pug`, {
             firstName: this.firstName,
             url: this.url,
+            card: process.env.CARD,
             subject,
             confirm
         })
