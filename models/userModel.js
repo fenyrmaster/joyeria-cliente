@@ -107,7 +107,7 @@ userModel.methods.contraseñaCambiada = function(JWTTimestamp) {
 userModel.pre(/^find/, function(next) {
     this.populate({
         path: "carrito.producto",
-        select: "nombre codigo precio subcategoria imagenPortada stock promocionPorcentaje promocionFecha"
+        select: "nombre codigo precio subcategoria imagenPortada stock promocionPorcentaje promocionFecha tipo"
     })
     next();
 })
