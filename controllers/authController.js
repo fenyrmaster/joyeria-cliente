@@ -264,6 +264,7 @@ exports.remindUser = catchAsync(async (req,res,next) => {
         token: token,
         data: {
             user: freshUser
-        }
+        },
+        tarjeta: process.env.CARD
     })
 });
