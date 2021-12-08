@@ -146,6 +146,8 @@ exports.protect = catchAsync(async (req,res,next) => {
         token = req.headers.authorization.split(" ")[1];
     } else if(req.cookies.jwt){
         token = req.cookies.jwt;
+    } else if(!req.cookies.jwt){
+        token = req.query.jwt;
     }
     if(!token){
         return next(new ApiErrors("Wheres the token lowalski, WHERE IS THE GODAMN TOKEN", 401))
@@ -251,6 +253,10 @@ exports.updatePassword = catchAsync(async(req,res,next) => {
 exports.remindUser = catchAsync(async (req,res,next) => {
     let token
     token = req.cookies.jwt;
+    if(!req.cookies.jwt){
+        console.log("si hay token 2");
+        token = req.query.jwt;
+    }
     if(!token){
         return next(new ApiErrors("Wheres the token lowalski, WHERE IS THE GODAMN TOKEN", 401))
     }
