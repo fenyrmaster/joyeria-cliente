@@ -4,6 +4,8 @@ const pedidosController = require("../controllers/pedidosController");
 
 const pedidoRouter = express.Router();
 
+pedidoRouter.delete("/eliminarPedido/:codigo", authController.protect, pedidosController.deletePedido);
+
 pedidoRouter
   .route('/')
   .get(authController.protect, pedidosController.getAllPedidos);

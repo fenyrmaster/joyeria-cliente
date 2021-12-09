@@ -62,4 +62,12 @@ exports.crearPedido = catchAsync(async (req,res,next) => {
     })
 });
 
+exports.deletePedido = catchAsync(async(req,res,next) => {
+    await Pedido.findOneAndDelete({ codigo: req.params.codigo });
+    res.status(204).json({
+        status: "success",
+        data: null
+    })
+})
+
 exports.getAllPedidos = factory.getAll(Pedido);
