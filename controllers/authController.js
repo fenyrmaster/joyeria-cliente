@@ -187,7 +187,7 @@ exports.isLoggedIn = catchAsync(async (req,res,next) => {
 exports.restrict = (...roles) => {
     return (req, res, next) => {
         if(!roles.includes(req.user.rol)){
-            return next(new ApiErrors("You cant do this kid, you are a junior, ask to your parent to do it", 403));
+            return next(new ApiErrors("No tienes permisos para hacer esto", 403));
         }
         next();
     }

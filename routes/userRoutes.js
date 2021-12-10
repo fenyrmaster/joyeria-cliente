@@ -12,8 +12,8 @@ userRouter.post("/login", authController.login);
 userRouter.post("/forgotPassword", authController.forgotPass);
 userRouter.patch("/resetPassword/:token", authController.resetPass);
 userRouter.get("/confirm/:token", authController.confirmIdentity);
-userRouter.patch("/updatePassword/me", authController.protect,authController.updatePassword);
-userRouter.patch("/updateData", authController.protect, userController.updateMe);
+userRouter.patch("/updatePassword/me", authController.protect, authController.restrict("cliente"), authController.updatePassword);
+userRouter.patch("/updateData", authController.protect, authController.restrict("cliente"), userController.updateMe);
 
 userRouter.post("/carritoAgregar", authController.protect, userController.addCarrito);
 userRouter.patch("/carritoEliminar", authController.protect, userController.removeCarrito);
