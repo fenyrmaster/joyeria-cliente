@@ -122,6 +122,12 @@ exports.updateProducto = factory.updateData(Producto);
 exports.deleteProducto = catchAsync(async (req,res,next) => {
     const fotos = await Producto.findById(req.params.id);
     if(fotos.imagenes.length !== 0){
+        cloudinary.config({
+            cloud_name: process.env.CLOUDINARY_NAME,
+            api_key: process.env.CLOUDINARY_KEY,
+            api_secret: process.env.CLOUDINARY_SECRET,
+            secure: true
+        });
         fotos.imagenes.forEach(el => {
             let photo = el.split("/");
             cloudinary.uploader.destroy(photo[photo.length - 1]);
